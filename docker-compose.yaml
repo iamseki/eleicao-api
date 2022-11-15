@@ -20,6 +20,7 @@ services:
       - "./:/app"
     environment:
       PORT: 8080
+      DATABASE_HOST: db
 
     ports:
       - "8080:8080"

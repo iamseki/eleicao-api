@@ -1,61 +1,61 @@
 import { RouteOptions } from 'fastify';
 
 import { Handler } from '../handlers';
-import { profitHandlerSchema } from '../handlers/schemas';
+import { inserirPartidoSchema } from '../handlers/schemas';
 
 const listarEleicoes = (listarEleicoesHandler: Handler): RouteOptions => ({
   method: 'GET',
   url: '/eleicao',
-  schema: profitHandlerSchema,
+  schema: inserirPartidoSchema,
   handler: listarEleicoesHandler
 });
 
 const listarCargosEletivos = (listarCargosEletivosHandler: Handler): RouteOptions => ({
   method: 'GET',
   url: '/eleicao/cargos',
-  schema: profitHandlerSchema,
+  schema: inserirPartidoSchema,
   handler: listarCargosEletivosHandler
 });
 
 const inserirVoto = (inserirVotoHandler: Handler): RouteOptions => ({
   method: 'POST',
   url: '/eleicao/:id/voto',
-  schema: profitHandlerSchema,
+  schema: inserirPartidoSchema,
   handler: inserirVotoHandler
 });
 
 const editarVoto = (editarVotoHandler: Handler): RouteOptions => ({
   method: 'PUT',
   url: '/eleicao/:id/voto',
-  schema: profitHandlerSchema,
+  schema: inserirPartidoSchema,
   handler: editarVotoHandler
 });
 
 const listarResultadosEleicoes = (listarResultadosEleicoesHandler: Handler): RouteOptions => ({
   method: 'GET',
   url: '/eleicao/resultados',
-  schema: profitHandlerSchema,
+  schema: inserirPartidoSchema,
   handler: listarResultadosEleicoesHandler
 });
 
 const inserirEleicao = (inserirEleicaoHandler: Handler): RouteOptions => ({
   method: 'POST',
   url: '/eleicao',
-  schema: profitHandlerSchema,
+  schema: inserirPartidoSchema,
   handler: inserirEleicaoHandler
 });
 
 const removerEleicao = (removerEleicaoHandler: Handler): RouteOptions => ({
   method: 'DELETE',
   url: '/eleicao/:id',
-  schema: profitHandlerSchema,
+  schema: inserirPartidoSchema,
   handler: removerEleicaoHandler
 });
 
 const editarEleicao = (editarEleicaoHandler: Handler): RouteOptions => ({
   method: 'PUT',
   url: '/eleicao/:id',
-  schema: profitHandlerSchema,
+  schema: inserirPartidoSchema,
   handler: editarEleicaoHandler
 });
 

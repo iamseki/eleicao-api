@@ -1,33 +1,38 @@
 import { RouteOptions } from 'fastify';
 
 import { Handler } from '../handlers';
-import { profitHandlerSchema } from '../handlers/schemas';
+import {
+  editarPartidoSchema,
+  inserirPartidoSchema,
+  listarPartidoSchema,
+  removerPartidoSchema
+} from '../handlers/schemas';
 
 const listarPartidos = (listarPartidosHandler: Handler): RouteOptions => ({
   method: 'GET',
   url: '/partido',
-  schema: profitHandlerSchema,
+  schema: listarPartidoSchema,
   handler: listarPartidosHandler
 });
 
 const inserirPartido = (inserirPartidoHandler: Handler): RouteOptions => ({
   method: 'POST',
   url: '/partido',
-  schema: profitHandlerSchema,
+  schema: inserirPartidoSchema,
   handler: inserirPartidoHandler
 });
 
 const removerPartido = (removerPartidoHandler: Handler): RouteOptions => ({
   method: 'DELETE',
   url: '/partido/:id',
-  schema: profitHandlerSchema,
+  schema: removerPartidoSchema,
   handler: removerPartidoHandler
 });
 
 const editarPartido = (editarPartidoHandler: Handler): RouteOptions => ({
   method: 'PUT',
   url: '/partido/:id',
-  schema: profitHandlerSchema,
+  schema: editarPartidoSchema,
   handler: editarPartidoHandler
 });
 

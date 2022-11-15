@@ -1,33 +1,33 @@
 import { RouteOptions } from 'fastify';
 
 import { Handler } from '../handlers';
-import { profitHandlerSchema } from '../handlers/schemas';
+import { inserirPartidoSchema } from '../handlers/schemas';
 
 const listarEleitores = (listarEleitoresHandler: Handler): RouteOptions => ({
   method: 'GET',
   url: '/eleitor',
-  schema: profitHandlerSchema,
+  schema: inserirPartidoSchema,
   handler: listarEleitoresHandler
 });
 
 const inserirEleitor = (inserirEleitorHandler: Handler): RouteOptions => ({
   method: 'POST',
   url: '/eleitor',
-  schema: profitHandlerSchema,
+  schema: inserirPartidoSchema,
   handler: inserirEleitorHandler
 });
 
 const removerEleitor = (removerEleitorHandler: Handler): RouteOptions => ({
   method: 'DELETE',
   url: '/eleitor/:id',
-  schema: profitHandlerSchema,
+  schema: inserirPartidoSchema,
   handler: removerEleitorHandler
 });
 
 const editarEleitor = (editarEleitorHandler: Handler): RouteOptions => ({
   method: 'PUT',
   url: '/eleitor/:id',
-  schema: profitHandlerSchema,
+  schema: inserirPartidoSchema,
   handler: editarEleitorHandler
 });
 

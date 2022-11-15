@@ -5,11 +5,11 @@ type Partido = {
 };
 
 interface InserirPartidoService {
-  inserirEleitor: (partido: Partido) => Promise<void>;
+  inserirPartido: (partido: Partido) => Promise<Partido>;
 }
 
 interface EditarPartidoService {
-  editarPartido: (partido: Partial<Partido>) => Promise<void>;
+  editarPartido: (partido: Partial<Partido>, id: number) => Promise<void>;
 }
 
 interface RemoverPartidoService {

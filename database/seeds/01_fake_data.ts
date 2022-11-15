@@ -8,6 +8,7 @@ const partidos = [
 
 const eleicoes = [
   { cargo_id: 1, ano: 2018 },
+
   { cargo_id: 2, ano: 2018 },
   { cargo_id: 3, ano: 2018 },
   { cargo_id: 1, ano: 2022 },

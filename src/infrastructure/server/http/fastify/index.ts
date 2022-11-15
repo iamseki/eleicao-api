@@ -1,5 +1,6 @@
-import Fastify, { FastifyError, FastifyInstance, FastifyBaseLogger, FastifyRequest, RouteOptions } from 'fastify';
+import Fastify, { FastifyError, FastifyInstance, FastifyLoggerInstance, FastifyRequest, RouteOptions } from 'fastify';
 import oas from 'fastify-oas';
+import cors from '@fastify/cors';
 
 const openApiConfig = {
   routePrefix: '/docs',
@@ -10,12 +11,12 @@ const openApiConfig = {
     consumes: ['application/json'],
     servers: [
       {
-        url: '/api/eleicao',
-        description: 'Cloud environments'
-      },
-      {
         url: '/',
         description: 'Local environment'
+      },
+      {
+        url: '/api/eleicao',
+        description: 'Cloud environments'
       }
     ]
   },
@@ -34,7 +35,7 @@ const loggerSerializer = {
   }
 };
 
-const newFastifyServer = async (routes: RouteOptions[], logger: FastifyBaseLogger): Promise<FastifyInstance> => {
+const newFastifyServer = async (routes: RouteOptions[], logger: FastifyLoggerInstance): Promise<FastifyInstance> => {
   const server: FastifyInstance = Fastify({
     logger,
     ajv: {
@@ -42,6 +43,10 @@ const newFastifyServer = async (routes: RouteOptions[], logger: FastifyBaseLogge
         coerceTypes: 'array'
       }
     }
+  });
+
+  await server.register(cors, {
+    // put your options here
   });
 
   server.setErrorHandler(async (error: FastifyError, request, reply) => {
