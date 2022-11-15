@@ -1,0 +1,27 @@
+version: "3.3"
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: docker
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      MYSQL_DATABASE: eleicao_api
+    ports:
+      - "3306:3306"
+  eleicao-api:
+    build:
+      dockerfile: Dockerfile
+      context: ./
+    links:
+      - db
+    volumes:
+      - "./:/app"
+    environment:
+      PORT: 8080
+
+    ports:
+      - "8080:8080"
+
+      

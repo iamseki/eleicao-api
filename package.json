@@ -1,0 +1,44 @@
+{
+  "name": "eleicao-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "husky install",
+    "build": "tsc",
+    "dev": "ts-node-dev src/index.ts",
+    "start": "node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "knex:create": "node ./node_modules/knex/bin/cli.js migrate:make -x ts",
+    "knex:migrate": "node ./node_modules/knex/bin/cli.js migrate:latest",
+    "knex:rollback": "node ./node_modules/knex/bin/cli.js migrate:rollback",
+    "knex:list": "node ./node_modules/knex/bin/cli.js migrate:list",
+    "knex:up": "node ./node_modules/knex/bin/cli.js migrate:up",
+    "knex:down": "node ./node_modules/knex/bin/cli.js migrate:down",
+    "knex:seed:create": "node ./node_modules/knex/bin/cli.js seed:make -x ts",
+    "knex:seed:run": "node ./node_modules/knex/bin/cli.js seed:run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "fastify": "^4.9.2",
+    "fastify-oas": "^3.0.8",
+    "knex": "^2.3.0",
+    "mysql2": "^2.3.3",
+    "pino": "^8.6.1",
+    "pino-pretty": "^9.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.2",
+    "@typescript-eslint/eslint-plugin": "^5.40.1",
+    "eslint": "^8.25.0",
+    "eslint-config-standard-with-typescript": "^23.0.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.8.4"
+  }
+}
