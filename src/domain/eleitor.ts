@@ -6,7 +6,7 @@ type Eleitor = {
 };
 
 interface InserirEleitorService {
-  inserirEleitor: (eleitor: Eleitor) => Promise<void>;
+  inserirEleitor: (eleitor: Eleitor) => Promise<Eleitor>;
 }
 
 interface EditarEleitorService {

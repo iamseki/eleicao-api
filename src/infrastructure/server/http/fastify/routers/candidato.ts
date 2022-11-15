@@ -2,6 +2,7 @@ import { RouteOptions } from 'fastify';
 
 import { Handler } from '../handlers';
 import { inserirPartidoSchema } from '../handlers/schemas';
+import { editarCandidatoSchema, inserirCandidatoSchema } from '../handlers/schemas/candidato';
 
 const listarCandidatos = (listarCandidatosHandler: Handler): RouteOptions => ({
   method: 'GET',
@@ -13,7 +14,7 @@ const listarCandidatos = (listarCandidatosHandler: Handler): RouteOptions => ({
 const inserirCandidato = (inserirCandidatoHandler: Handler): RouteOptions => ({
   method: 'POST',
   url: '/candidato',
-  schema: inserirPartidoSchema,
+  schema: inserirCandidatoSchema,
   handler: inserirCandidatoHandler
 });
 
@@ -27,7 +28,7 @@ const removerCandidato = (removerCandidatoHandler: Handler): RouteOptions => ({
 const editarCandidato = (editarCandidatoHandler: Handler): RouteOptions => ({
   method: 'PUT',
   url: '/candidato/:id',
-  schema: inserirPartidoSchema,
+  schema: editarCandidatoSchema,
   handler: editarCandidatoHandler
 });
 

@@ -24,7 +24,7 @@ interface LimparVotosService {
 }
 
 interface CriarEleicaoService {
-  criarEleicao: (eleicao: Eleicao) => Promise<void>;
+  criarEleicao: (eleicao: Eleicao) => Promise<Eleicao>;
 }
 
 type FiltroResultadoEleicao = {
@@ -42,4 +42,9 @@ interface ResultadoEleicaoService {
   resultadoEleicao: (filtro: FiltroResultadoEleicao) => Promise<ResultadoEleicao[]>;
 }
 
-export { Voto, Eleicao, LimparVotosService, CriarEleicaoService, ResultadoEleicaoService };
+interface ListarEleicoesService {
+  listarEleicoes: () => Promise<Eleicao[]>;
+  listarCandidatoPorEleicao: (id: number) => Promise<Candidato[]>;
+}
+
+export { Voto, Eleicao, LimparVotosService, ListarEleicoesService, CriarEleicaoService, ResultadoEleicaoService };

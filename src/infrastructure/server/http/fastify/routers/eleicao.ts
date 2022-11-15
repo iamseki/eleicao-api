@@ -2,19 +2,20 @@ import { RouteOptions } from 'fastify';
 
 import { Handler } from '../handlers';
 import { inserirPartidoSchema } from '../handlers/schemas';
+import { inserirEleicaoSchema, listarCandidatoPorEleicao, listarEleicaoSchema } from '../handlers/schemas/eleicao';
 
 const listarEleicoes = (listarEleicoesHandler: Handler): RouteOptions => ({
   method: 'GET',
   url: '/eleicao',
-  schema: inserirPartidoSchema,
+  schema: listarEleicaoSchema,
   handler: listarEleicoesHandler
 });
 
-const listarCargosEletivos = (listarCargosEletivosHandler: Handler): RouteOptions => ({
+const listarCandidatosPorEleicao = (listarCandidatosPorEleicaoHandler: Handler): RouteOptions => ({
   method: 'GET',
-  url: '/eleicao/cargos',
-  schema: inserirPartidoSchema,
-  handler: listarCargosEletivosHandler
+  url: '/eleicao/:eleicao_id/candidatos',
+  schema: listarCandidatoPorEleicao,
+  handler: listarCandidatosPorEleicaoHandler
 });
 
 const inserirVoto = (inserirVotoHandler: Handler): RouteOptions => ({
@@ -41,7 +42,7 @@ const listarResultadosEleicoes = (listarResultadosEleicoesHandler: Handler): Rou
 const inserirEleicao = (inserirEleicaoHandler: Handler): RouteOptions => ({
   method: 'POST',
   url: '/eleicao',
-  schema: inserirPartidoSchema,
+  schema: inserirEleicaoSchema,
   handler: inserirEleicaoHandler
 });
 
@@ -67,5 +68,5 @@ export {
   listarResultadosEleicoes,
   inserirVoto,
   editarVoto,
-  listarCargosEletivos
+  listarCandidatosPorEleicao
 };

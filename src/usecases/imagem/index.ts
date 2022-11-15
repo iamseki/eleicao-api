@@ -1,0 +1,1 @@
+export { newListarImagensDb } from './listar';

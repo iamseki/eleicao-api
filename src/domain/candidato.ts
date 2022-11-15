@@ -3,12 +3,17 @@ import { Partido } from './partido';
 
 type Imagem = {
   id?: number;
-  imageUrl: string;
+  img_link: string;
   descricao: string;
 };
 
+interface ListarImagensService {
+  listarImagens: () => Promise<Imagem[]>;
+}
+
 type Candidato = {
   id?: number;
+  nome: string;
   codigo: number;
   partido: Partido;
   cargo: Cargo;
@@ -22,11 +27,11 @@ interface ListarCandidatosService {
 }
 
 interface InserirCandidatoService {
-  inserirCandidato: (candidato: Candidato) => Promise<void>;
+  inserirCandidato: (candidato: Candidato) => Promise<Candidato>;
 }
 
 interface EditarCandidatoService {
-  inserirCandidato: (candidato: Partial<Candidato>) => Promise<void>;
+  editarCandidato: (candidato: Partial<Candidato>, id: number) => Promise<void>;
 }
 
 interface RemoverCandidatoService {
@@ -39,5 +44,6 @@ export {
   ListarCandidatosService,
   InserirCandidatoService,
   RemoverCandidatoService,
-  EditarCandidatoService
+  EditarCandidatoService,
+  ListarImagensService
 };
