@@ -18,6 +18,12 @@ const inserirCandidato = (inserirCandidatoHandler: Handler): RouteOptions => ({
   handler: inserirCandidatoHandler
 });
 
+const limparCandidatos = (limparCandidatosHandler: Handler): RouteOptions => ({
+  method: 'DELETE',
+  url: '/candidato',
+  handler: limparCandidatosHandler
+});
+
 const removerCandidato = (removerCandidatoHandler: Handler): RouteOptions => ({
   method: 'DELETE',
   url: '/candidato/:id',
@@ -32,4 +38,4 @@ const editarCandidato = (editarCandidatoHandler: Handler): RouteOptions => ({
   handler: editarCandidatoHandler
 });
 
-export { listarCandidatos, inserirCandidato, removerCandidato, editarCandidato };
+export { listarCandidatos, inserirCandidato, removerCandidato, editarCandidato, limparCandidatos };

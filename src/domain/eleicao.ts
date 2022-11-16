@@ -1,6 +1,5 @@
 import { Candidato } from './candidato';
 import { Cargo } from './cargo';
-import { Eleitor } from './eleitor';
 
 type Eleicao = {
   id?: number;
@@ -10,17 +9,21 @@ type Eleicao = {
 
 type Voto = {
   id?: number;
-  candidato: Candidato;
-  eleicao: Eleicao;
-  eleitor: Eleitor;
+  eleicao_id: number;
+  titulo_eleitor: number;
+  candidato_codigo: number;
 };
 
 type FiltroLimparVotos = {
   ano?: number;
 };
 
+interface VotarService {
+  votar: (voto: Voto) => Promise<void>;
+}
+
 interface LimparVotosService {
-  limparVotos: (filtro: FiltroLimparVotos) => Promise<void>;
+  limparVotos: () => Promise<void>;
 }
 
 interface CriarEleicaoService {
@@ -33,13 +36,12 @@ type FiltroResultadoEleicao = {
 };
 
 type ResultadoEleicao = {
-  ano: number;
-  cargo: Cargo;
-  candidatos: Candidato & Array<{ votos: number }>;
+  cargo: string;
+  candidatos: Partial<Candidato> & Array<{ votos: number }>;
 };
 
 interface ResultadoEleicaoService {
-  resultadoEleicao: (filtro: FiltroResultadoEleicao) => Promise<ResultadoEleicao[]>;
+  resultadoEleicao: () => Promise<ResultadoEleicao[]>;
 }
 
 interface ListarEleicoesService {
@@ -47,4 +49,15 @@ interface ListarEleicoesService {
   listarCandidatoPorEleicao: (id: number) => Promise<Candidato[]>;
 }
 
-export { Voto, Eleicao, LimparVotosService, ListarEleicoesService, CriarEleicaoService, ResultadoEleicaoService };
+export {
+  Voto,
+  Eleicao,
+  LimparVotosService,
+  ListarEleicoesService,
+  CriarEleicaoService,
+  ResultadoEleicaoService,
+  VotarService,
+  ResultadoEleicao,
+  FiltroLimparVotos,
+  FiltroResultadoEleicao
+};

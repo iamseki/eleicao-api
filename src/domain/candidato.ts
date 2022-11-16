@@ -35,7 +35,7 @@ interface EditarCandidatoService {
 }
 
 interface RemoverCandidatoService {
-  removerCandidato: (candidato: Partial<Candidato>) => Promise<void>;
+  limparCandidatos: () => Promise<void>;
 }
 
 export {

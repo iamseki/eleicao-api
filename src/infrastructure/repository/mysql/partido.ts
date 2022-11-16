@@ -30,9 +30,14 @@ const listar = async (client: Knex) => {
   return client.select('*').from('partido');
 };
 
+const limpar = async (client: Knex) => {
+  await client.delete().from('partido');
+};
+
 export const newPartidoRepository = (client: Knex): PartidoRepository => ({
   inserir: async (partido: Partido) => inserir(client, partido),
   editar: async (partido: Partial<Partido>, id: number) => editar(client, partido, id),
   remover: async (id: number) => remover(client, id),
-  listar: async () => listar(client)
+  listar: async () => listar(client),
+  limparPartidos: async () => limpar(client)
 });

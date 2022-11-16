@@ -14,6 +14,7 @@ interface EditarPartidoService {
 
 interface RemoverPartidoService {
   removerPartido: (partido: Partial<Partido>) => Promise<void>;
+  limparPartidos: () => Promise<void>;
 }
 
 interface ListarPartidosService {

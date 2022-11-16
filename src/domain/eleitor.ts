@@ -1,7 +1,7 @@
 type Eleitor = {
   id?: number;
-  tituloEleitor: number;
-  nome: string;
+  titulo_eleitor: number;
+  nome?: string;
   CPF?: string;
 };
 
@@ -21,4 +21,15 @@ interface ListarEleitoresService {
   listarEleitor: () => Promise<Eleitor[]>;
 }
 
-export { Eleitor, InserirEleitorService, EditarEleitorService, RemoverEleitorService, ListarEleitoresService };
+interface ConsultarEleitorService {
+  consultarEleitor: (titulo_eleitor: number) => Promise<Eleitor>;
+}
+
+export {
+  Eleitor,
+  InserirEleitorService,
+  EditarEleitorService,
+  RemoverEleitorService,
+  ListarEleitoresService,
+  ConsultarEleitorService
+};

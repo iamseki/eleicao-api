@@ -40,3 +40,10 @@ export const newListarPartidoHandler =
     const partidos = await svc.listarPartidos();
     return reply.header('Content-Type', 'application/json').code(200).send(partidos);
   };
+
+export const newLimparPartidosHandler =
+  (svc: RemoverPartidoService): Handler =>
+  async (_: FastifyRequest, reply: FastifyReply) => {
+    await svc.limparPartidos();
+    return reply.code(204).send();
+  };

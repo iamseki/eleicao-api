@@ -17,7 +17,8 @@ import {
   newEditarPartidoHandler,
   newListarPartidoHandler,
   newRemoverPartidoHandler,
-  newInserirPartidoHandler
+  newInserirPartidoHandler,
+  newLimparPartidosHandler
 } from './infrastructure/server/http/fastify/handlers/partido';
 import { newCargoRepository } from './infrastructure/repository/mysql/cargo';
 import { newListarCargoHandler } from './infrastructure/server/http/fastify/handlers/cargo';
@@ -26,14 +27,19 @@ import { newListarImagemHandler } from './infrastructure/server/http/fastify/han
 import { newEleicaoRepository } from './infrastructure/repository/mysql/eleicao';
 import {
   newInserirEleicaoHandler,
+  newInserirVotoHandler,
+  newLimparVotosHandler,
   newListarCandidatosPorEleicaoHandler,
-  newListarEleicaoHandler
+  newListarEleicaoHandler,
+  newResultadoEleicaoHandler
 } from './infrastructure/server/http/fastify/handlers/eleicao';
 import { newCandidatoRepository } from './infrastructure/repository/mysql/candidato';
 import {
   newEditarCandidatoHandler,
-  newInserirCandidatoHandler
+  newInserirCandidatoHandler,
+  newLimparCandidatosHandler
 } from './infrastructure/server/http/fastify/handlers/candidato';
+import { newEleitorRepository } from './infrastructure/repository/mysql/eleitor';
 
 dotenv.config();
 
@@ -65,23 +71,33 @@ const initFastifyDependencies = async (config: Config): Promise<FastifyInstance>
   const candidatoMysqlRepository = newCandidatoRepository(mysqlClient);
   const inserirCandidatoSvc = candidatoUseCases.newInserirCandidatoDb(candidatoMysqlRepository);
   const editarCandidatoSvc = candidatoUseCases.newEditarCandidatoDb(candidatoMysqlRepository);
+  const removerCandidatoSvc = candidatoUseCases.newRemoverCandidatoDb(candidatoMysqlRepository);
 
   const eleicaoMysqlRepository = newEleicaoRepository(mysqlClient);
+  const eleitorMysqlRepository = newEleitorRepository(mysqlClient);
   const listarEleicoesSvc = eleicaoUseCases.newListarEleicoesDb(eleicaoMysqlRepository);
   const criarEleicaoSvc = eleicaoUseCases.newInserirEleicaoDb(eleicaoMysqlRepository);
+  const votarEleicaoSvc = eleicaoUseCases.newInserirVotoDb(eleicaoMysqlRepository, eleitorMysqlRepository);
+  const limparVotosEleicaoSvc = eleicaoUseCases.newLimparVotosDb(eleicaoMysqlRepository);
+  const resultadoEleicaoSvc = eleicaoUseCases.newResultadoEleicoesDb(eleicaoMysqlRepository);
 
   const routes: RouteOptions[] = [
     partidoRoutes.inserirPartido(newInserirPartidoHandler(inserirPartidoSvc)),
     partidoRoutes.editarPartido(newEditarPartidoHandler(editarPartidoSvc)),
     partidoRoutes.listarPartidos(newListarPartidoHandler(listarPartidosSvc)),
     partidoRoutes.removerPartido(newRemoverPartidoHandler(removerPartidoSvc)),
+    partidoRoutes.limparPartidos(newLimparPartidosHandler(removerPartidoSvc)),
     cargoRoutes.listarCargos(newListarCargoHandler(listarCargoSvc)),
     imagemRoutes.listarImagens(newListarImagemHandler(listarImagemSvc)),
     candidatoRoutes.editarCandidato(newEditarCandidatoHandler(editarCandidatoSvc)),
     candidatoRoutes.inserirCandidato(newInserirCandidatoHandler(inserirCandidatoSvc)),
+    candidatoRoutes.limparCandidatos(newLimparCandidatosHandler(removerCandidatoSvc)),
     eleicaoRoutes.listarEleicoes(newListarEleicaoHandler(listarEleicoesSvc)),
     eleicaoRoutes.inserirEleicao(newInserirEleicaoHandler(criarEleicaoSvc)),
-    eleicaoRoutes.listarCandidatosPorEleicao(newListarCandidatosPorEleicaoHandler(listarEleicoesSvc))
+    eleicaoRoutes.listarCandidatosPorEleicao(newListarCandidatosPorEleicaoHandler(listarEleicoesSvc)),
+    eleicaoRoutes.inserirVoto(newInserirVotoHandler(votarEleicaoSvc)),
+    eleicaoRoutes.limparVotosEleicao(newLimparVotosHandler(limparVotosEleicaoSvc)),
+    eleicaoRoutes.resultadoEleicao(newResultadoEleicaoHandler(resultadoEleicaoSvc))
   ];
 
   return await newFastifyServer(routes, logger);

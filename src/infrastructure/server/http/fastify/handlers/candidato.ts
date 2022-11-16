@@ -1,5 +1,10 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { Candidato, EditarCandidatoService, InserirCandidatoService } from '../../../../../domain/candidato';
+import {
+  Candidato,
+  EditarCandidatoService,
+  InserirCandidatoService,
+  RemoverCandidatoService
+} from '../../../../../domain/candidato';
 
 import { Handler } from './handler';
 import { UriParams } from './schemas/partido';
@@ -19,4 +24,11 @@ export const newEditarCandidatoHandler =
     const candidatoId = request.params.id;
     await svc.editarCandidato(candidato, candidatoId);
     return reply.header('Content-Type', 'application/json').code(200).send();
+  };
+
+export const newLimparCandidatosHandler =
+  (svc: RemoverCandidatoService): Handler =>
+  async (_: FastifyRequest, reply: FastifyReply) => {
+    await svc.limparCandidatos();
+    return reply.code(204).send();
   };

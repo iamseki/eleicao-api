@@ -28,8 +28,8 @@ export async function up(knex: Knex): Promise<void> {
 
   await knex.schema.createTable('eleitor', (table: Knex.TableBuilder) => {
     table.increments('id');
-    table.string('titulo_eleitor').unique().notNullable();
-    table.string('nome').notNullable();
+    table.integer('titulo_eleitor').unique().notNullable();
+    table.string('nome').nullable();
     table.string('cpf').unique().nullable();
   });
 
@@ -45,8 +45,8 @@ export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable('voto', (table: Knex.TableBuilder) => {
     table.increments('id');
     table.integer('eleitor_id').unsigned().references('id').inTable('eleitor').notNullable().onDelete('CASCADE');
-    table.integer('candidato_id').unsigned().references('id').inTable('candidato').notNullable().onDelete('CASCADE');
-    table.integer('eleicao_id').unsigned().references('id').inTable('eleicao').nullable().onDelete('CASCADE');
+    table.integer('candidato_id').unsigned().references('id').inTable('candidato').nullable().onDelete('CASCADE');
+    table.integer('eleicao_id').unsigned().references('id').inTable('eleicao').notNullable().onDelete('CASCADE');
 
     table.unique(['eleitor_id', 'candidato_id', 'eleicao_id']);
   });
@@ -56,6 +56,7 @@ export async function down(knex: Knex): Promise<void> {
   await knex.schema.dropTableIfExists('voto');
   await knex.schema.dropTableIfExists('candidato');
   await knex.schema.dropTableIfExists('eleitor');
+  await knex.schema.dropTableIfExists('partido');
   await knex.schema.dropTableIfExists('imagem');
   await knex.schema.dropTableIfExists('eleicao');
   await knex.schema.dropTableIfExists('cargo');

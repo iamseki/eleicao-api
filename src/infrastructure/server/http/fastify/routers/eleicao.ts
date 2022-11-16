@@ -2,7 +2,12 @@ import { RouteOptions } from 'fastify';
 
 import { Handler } from '../handlers';
 import { inserirPartidoSchema } from '../handlers/schemas';
-import { inserirEleicaoSchema, listarCandidatoPorEleicao, listarEleicaoSchema } from '../handlers/schemas/eleicao';
+import {
+  inserirEleicaoSchema,
+  inserirVotoSchema,
+  listarCandidatoPorEleicao,
+  listarEleicaoSchema
+} from '../handlers/schemas/eleicao';
 
 const listarEleicoes = (listarEleicoesHandler: Handler): RouteOptions => ({
   method: 'GET',
@@ -20,8 +25,8 @@ const listarCandidatosPorEleicao = (listarCandidatosPorEleicaoHandler: Handler):
 
 const inserirVoto = (inserirVotoHandler: Handler): RouteOptions => ({
   method: 'POST',
-  url: '/eleicao/:id/voto',
-  schema: inserirPartidoSchema,
+  url: '/eleicao/voto',
+  schema: inserirVotoSchema,
   handler: inserirVotoHandler
 });
 
@@ -32,11 +37,10 @@ const editarVoto = (editarVotoHandler: Handler): RouteOptions => ({
   handler: editarVotoHandler
 });
 
-const listarResultadosEleicoes = (listarResultadosEleicoesHandler: Handler): RouteOptions => ({
+const resultadoEleicao = (resultadoEleicaoHandler: Handler): RouteOptions => ({
   method: 'GET',
-  url: '/eleicao/resultados',
-  schema: inserirPartidoSchema,
-  handler: listarResultadosEleicoesHandler
+  url: '/eleicao/resultado',
+  handler: resultadoEleicaoHandler
 });
 
 const inserirEleicao = (inserirEleicaoHandler: Handler): RouteOptions => ({
@@ -53,6 +57,12 @@ const removerEleicao = (removerEleicaoHandler: Handler): RouteOptions => ({
   handler: removerEleicaoHandler
 });
 
+const limparVotosEleicao = (removerVotosEleicaoHandler: Handler): RouteOptions => ({
+  method: 'DELETE',
+  url: '/eleicao/votos',
+  handler: removerVotosEleicaoHandler
+});
+
 const editarEleicao = (editarEleicaoHandler: Handler): RouteOptions => ({
   method: 'PUT',
   url: '/eleicao/:id',
@@ -65,8 +75,9 @@ export {
   inserirEleicao,
   removerEleicao,
   editarEleicao,
-  listarResultadosEleicoes,
   inserirVoto,
   editarVoto,
-  listarCandidatosPorEleicao
+  listarCandidatosPorEleicao,
+  limparVotosEleicao,
+  resultadoEleicao
 };

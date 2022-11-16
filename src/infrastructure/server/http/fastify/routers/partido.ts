@@ -29,6 +29,12 @@ const removerPartido = (removerPartidoHandler: Handler): RouteOptions => ({
   handler: removerPartidoHandler
 });
 
+const limparPartidos = (limparPartidosHandler: Handler): RouteOptions => ({
+  method: 'DELETE',
+  url: '/partido',
+  handler: limparPartidosHandler
+});
+
 const editarPartido = (editarPartidoHandler: Handler): RouteOptions => ({
   method: 'PUT',
   url: '/partido/:id',
@@ -36,4 +42,4 @@ const editarPartido = (editarPartidoHandler: Handler): RouteOptions => ({
   handler: editarPartidoHandler
 });
 
-export { listarPartidos, inserirPartido, removerPartido, editarPartido };
+export { listarPartidos, inserirPartido, removerPartido, editarPartido, limparPartidos };

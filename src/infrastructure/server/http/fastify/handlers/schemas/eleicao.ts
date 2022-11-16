@@ -23,6 +23,18 @@ const listarCandidatoPorEleicao: FastifySchema = {
   }
 };
 
+const inserirVotoSchema: FastifySchema = {
+  body: {
+    type: 'object',
+    required: ['titulo_eleitor', 'candidato_codigo', 'eleicao_id'],
+    properties: {
+      titulo_eleitor: { type: 'number' },
+      candidato_codigo: { type: 'number' },
+      eleicao_id: { type: 'number' }
+    }
+  }
+};
+
 type UriParams = { eleicao_id: number };
 
-export { listarEleicaoSchema, inserirEleicaoSchema, listarCandidatoPorEleicao, UriParams };
+export { listarEleicaoSchema, inserirEleicaoSchema, listarCandidatoPorEleicao, inserirVotoSchema, UriParams };
